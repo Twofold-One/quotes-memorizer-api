@@ -1,54 +1,33 @@
 package main
 
 import (
-	"database/sql"
-	"fmt"
 	"log"
-	"net/http"
-	"os"
 
-	"github.com/Twofold-One/quotes-memorizer-api/pkg/models/postgresql"
-
-	"github.com/gorilla/mux"
-	_ "github.com/jackc/pgx/v4/stdlib"
+	quotes_memorizer "github.com/Twofold-One/quotes-memorizer-api"
+	"github.com/Twofold-One/quotes-memorizer-api/pkg/handler"
+	"github.com/Twofold-One/quotes-memorizer-api/pkg/repository"
+	"github.com/Twofold-One/quotes-memorizer-api/pkg/service"
+	"github.com/spf13/viper"
 )
 
-type App struct {
-	DB *sql.DB
-	Router *mux.Router
-	quotes *postgresql.QuoteModel
-}
-
-func (app *App) InitializeApp() {
-	db, err := sql.Open("pgx", os.Getenv("DBURL"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
-	pingErr := db.Ping()
-	if pingErr != nil {
-		log.Fatal(pingErr)
-	}
-	fmt.Println("Connected to DB!")
-
-	app.Router = mux.NewRouter()
-	app.InitializeRoutes()
-}
-
-func (app *App) Run() {
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), app.Router))
-}
-
 func main() {
+	if err := initConfig(); err != nil {
+		log.Fatalf("error initializing configs: %s", err.Error())
+	}
 
-	app := App{}
-	app.InitializeApp()
-	app.Run()
+	repos := repository.NewRepository()
+	services := service.NewService(repos)
+	handlers := handler.NewHandler(services)
 
-	// custom loggers
-	// infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
-	// errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
-	
+	srv := new(quotes_memorizer.Server)
+
+	if err := srv.Run(viper.GetString("8000"), handlers.InitRoutes()); err != nil {
+		log.Fatalf("error occured while running http server: %s", err.Error())
+	}
 }
 
+func initConfig() error {
+	viper.AddConfigPath("configs")
+	viper.SetConfigFile("config")
+	return viper.ReadInConfig()
+}
