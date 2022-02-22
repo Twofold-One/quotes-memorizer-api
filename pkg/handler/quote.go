@@ -1,9 +1,11 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 func (h *Handler) createQuote(c *gin.Context) {
-
+	
 }
 
 func (h *Handler) getAllQuotes(c *gin.Context) {
