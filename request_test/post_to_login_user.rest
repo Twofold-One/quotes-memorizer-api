@@ -1,0 +1,7 @@
+POST http://localhost:8000/auth/sign-in
+Content-Type: "application/json"
+
+{
+    "username": "evangeras",
+    "password": "random123" 
+}

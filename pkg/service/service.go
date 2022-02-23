@@ -7,20 +7,23 @@ import (
 
 type Authorization interface {
 	CreateUser(user quotes_memorizer.User) (int, error)
+	GenerateToken(username, password string) (string, error)
+	ParseToken(token string) (int, error)
 }
 
-type Quotes interface {
-
+type Quote interface {
+	Create(userId int, quote quotes_memorizer.Quote) (int, error)
 }
 
 type Service struct {
 	Authorization
-	Quotes
+	Quote
 }
 
 // NewSevice is a constructor function.
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repos.Authorization),
+		Quote: NewQuotesService(repos.Quote),
 	}
 }
