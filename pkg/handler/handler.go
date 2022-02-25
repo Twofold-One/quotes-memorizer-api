@@ -30,7 +30,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			quotes.GET("/", h.getAllQuotes)
 			quotes.GET("/:id", h.getQuoteById)
 			quotes.PUT("/:id", h.updateQuote)
-			quotes.DELETE("/id", h.deleteQuote)
+			quotes.DELETE("/:id", h.deleteQuote)
 		}
 	}
 	return router

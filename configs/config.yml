@@ -1,7 +1,7 @@
 port: "8000"
 
 db:
-  username: "nnlzzfxdlqonlb"
-  host: "ec2-52-208-145-55.eu-west-1.compute.amazonaws.com"
+  username: "ayzooomvvtjwjg"
+  host: "ec2-54-228-97-176.eu-west-1.compute.amazonaws.com"
   port: "5432"
-  dbname: "dctuef6g2cfpq4"
+  dbname: "dcrg492miplpqq"

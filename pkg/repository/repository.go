@@ -12,6 +12,10 @@ type Authorization interface {
 
 type Quote interface {
 	Create(userId int, quote quotes_memorizer.Quote) (int, error)
+	GetAll(userId int) ([]quotes_memorizer.Quote, error)
+	GetById(userId, quoteId int) (quotes_memorizer.Quote, error)
+	Delete(userId, quoteId int) error
+	Update(userId, quoteId int, input quotes_memorizer.UpdateQuoteInput) error
 }
 
 type Repository struct {

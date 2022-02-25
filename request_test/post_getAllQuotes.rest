@@ -1,0 +1,6 @@
+POST http://localhost:8000/auth/sign-up
+Content-Type: application/json 
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU4NDg0NDksImlhdCI6MTY0NTgwNTI0OSwidXNlcl9pZCI6MX0.HpP1sb5np0qO48vDELgUc5HopxhR7QtopK7Y26Ea_so
+
+
+
