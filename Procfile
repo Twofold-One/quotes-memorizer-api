@@ -1,1 +1,1 @@
-web: bin/quotes-memorizer-api
+web: ./app
