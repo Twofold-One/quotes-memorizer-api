@@ -28,13 +28,17 @@ func main() {
 		logrus.Fatalf("error loading env variable: %s", err.Error())
 	}
 
-	db, err := repository.NewPostgresDB(repository.Config{
-		Username: viper.GetString("db.username"),
-		Password: os.Getenv("DB_PASSWORD"),
-		Host: viper.GetString("db.host"),
-		Port: viper.GetString("db.port"),
-		DBName: viper.GetString("db.dbname"),
-	})
+	// for local env
+	
+	// db, err := repository.NewPostgresDB(repository.Config{
+	// 	Username: viper.GetString("db.username"),
+	// 	Password: os.Getenv("DB_PASSWORD"),
+	// 	Host: viper.GetString("db.host"),
+	// 	Port: viper.GetString("db.port"),
+	// 	DBName: viper.GetString("db.dbname"),
+	// })
+
+	db, err := repository.NewPostgresDB()
 	if err != nil {
 		logrus.Fatalf("failed to initialize db: %s", err.Error())
 	}
