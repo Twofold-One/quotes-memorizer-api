@@ -70,38 +70,38 @@ func (r *QuotePostgres) Update(userId, quoteId int, input quotes_memorizer.Updat
 	argId := 1
 
 	if input.Author != nil {
-		setValues = append(setValues, fmt.Sprintf(`author=%d`, argId))
+		setValues = append(setValues, fmt.Sprintf(`author=$%d`, argId))
 		args = append(args, *input.Author)
 		argId++
 	}
 
 	if input.Quote != nil {
-		setValues = append(setValues, fmt.Sprintf(`quote=%d`, argId))
+		setValues = append(setValues, fmt.Sprintf(`quote=$%d`, argId))
 		args = append(args, *input.Quote)
 		argId++
 	}
 
 	if input.Source != nil {
-		setValues = append(setValues, fmt.Sprintf(`source=%d`, argId))
+		setValues = append(setValues, fmt.Sprintf(`source=$%d`, argId))
 		args = append(args, *input.Source)
 		argId++
 	}
 
 	if input.SourceType != nil {
-		setValues = append(setValues, fmt.Sprintf(`sourcetype=%d`, argId))
+		setValues = append(setValues, fmt.Sprintf(`sourcetype=$%d`, argId))
 		args = append(args, *input.SourceType)
 		argId++
 	}
 
 	if input.Created != nil {
-		setValues = append(setValues, fmt.Sprintf(`created=%d`, argId))
+		setValues = append(setValues, fmt.Sprintf(`created=$%d`, argId))
 		args = append(args, *input.Created)
 		argId++
 	}
 
 	setQuery := strings.Join(setValues, ", ")
 
-	query := fmt.Sprintf(`update %s q set %s from %s uq where q.id = uq.quote_id and uq.quote_id=%d and uq.user_id=%d`, quotesTable, setQuery, usersQuotesTable, argId, argId+1)
+	query := fmt.Sprintf(`update %s q set %s from %s uq where q.id = uq.quote_id and uq.quote_id=$%d and uq.user_id=$%d`, quotesTable, setQuery, usersQuotesTable, argId, argId+1)
 	args = append(args, quoteId, userId)
 
 	logrus.Debugf("updateQuery: %s", query)
