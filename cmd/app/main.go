@@ -11,7 +11,6 @@ import (
 	"github.com/Twofold-One/quotes-memorizer-api/pkg/repository"
 	"github.com/Twofold-One/quotes-memorizer-api/pkg/service"
 
-	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 
@@ -24,12 +23,12 @@ func main() {
 		logrus.Fatalf("error initializing configs: %s", err.Error())
 	}
 
-	if err := godotenv.Load(); err != nil {
-		logrus.Fatalf("error loading env variable: %s", err.Error())
-	}
+	// if err := godotenv.Load(); err != nil {
+	// 	logrus.Fatalf("error loading env variable: %s", err.Error())
+	// }
 
 	// for local env
-	
+
 	// db, err := repository.NewPostgresDB(repository.Config{
 	// 	Username: viper.GetString("db.username"),
 	// 	Password: os.Getenv("DB_PASSWORD"),
