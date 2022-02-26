@@ -12,16 +12,17 @@ import (
 	"github.com/Twofold-One/quotes-memorizer-api/pkg/service"
 
 	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
-	if err := initConfig(); err != nil {
-		logrus.Fatalf("error initializing configs: %s", err.Error())
-	}
+	// if err := initConfig(); err != nil {
+	// 	logrus.Fatalf("error initializing configs: %s", err.Error())
+	// }
+
+	port := os.Getenv("PORT")
 
 	// if err := godotenv.Load(); err != nil {
 	// 	logrus.Fatalf("error loading env variable: %s", err.Error())
@@ -51,7 +52,7 @@ func main() {
 	// graceful shutdown
 	go func () {
 		// for local env: viper.GetString("port")
-		if err := srv.Run(":" + os.Getenv("PORT"), handlers.InitRoutes()); err != nil {
+		if err := srv.Run(port, handlers.InitRoutes()); err != nil {
 			logrus.Fatalf("error occured while running http server: %s", err.Error())
 		}
 	}()
@@ -72,8 +73,8 @@ func main() {
 	}
 }
 
-func initConfig() error {
-	viper.AddConfigPath("configs")
-	viper.SetConfigName("config")
-	return viper.ReadInConfig()
-}
+// func initConfig() error {
+// 	viper.AddConfigPath("configs")
+// 	viper.SetConfigName("config")
+// 	return viper.ReadInConfig()
+// }
