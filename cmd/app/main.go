@@ -16,6 +16,19 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
+// @title           Quotes-Memorizer API
+// @version         1.0
+// @description     API backend for Quotes-Memorizer App.
+
+// @contact.name   Twofold-One
+// @contact.email  evangerasdev@gmail.com
+
+// @host      https://quotes-memorizer.herokuapp.com/
+// @BasePath  /
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 	// if err := initConfig(); err != nil {
