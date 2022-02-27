@@ -1,4 +1,16 @@
+basePath: /
+host: https://quotes-memorizer.herokuapp.com/
 info:
-  contact: {}
+  contact:
+    email: evangerasdev@gmail.com
+    name: Twofold-One
+  description: API backend for Quotes-Memorizer App.
+  title: Quotes-Memorizer API
+  version: "1.0"
 paths: {}
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

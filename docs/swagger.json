@@ -1,7 +1,22 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "API backend for Quotes-Memorizer App.",
+        "title": "Quotes-Memorizer API",
+        "contact": {
+            "name": "Twofold-One",
+            "email": "evangerasdev@gmail.com"
+        },
+        "version": "1.0"
     },
-    "paths": {}
+    "host": "https://quotes-memorizer.herokuapp.com/",
+    "basePath": "/",
+    "paths": {},
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
 }
