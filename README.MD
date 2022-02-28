@@ -8,7 +8,7 @@ Application API contains user JWT authorization and usual CRUD operations with q
 
 ### TODO:
 
--Swagger documentation
+-Swagger documentation (ready)
 
 -Tests for endpoints
 
