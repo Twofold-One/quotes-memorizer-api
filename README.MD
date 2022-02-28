@@ -1,6 +1,6 @@
 # Quotes-Memorizer App
 
-Application API contains user JWT authorization and usual CRUD operations with quotes. Use API swagger documentation URL below for more info. Created using Go and Gin framework. Special thanks to [Maksim Zhashkevych](https://github.com/zhashkevych).
+Application API contains user JWT authorization and usual CRUD operations with quotes. Use API swagger documentation URL below for more info. Created using Go and Gin framework.
 
 [API Swagger Gocumentation](https://quotes-memorizer.herokuapp.com/swagger/index.html)
 
@@ -11,3 +11,5 @@ Application API contains user JWT authorization and usual CRUD operations with q
 -Swagger documentation
 
 -Tests for endpoints
+
+<!-- Special thanks to [Maksim Zhashkevych](https://github.com/zhashkevych). -->
