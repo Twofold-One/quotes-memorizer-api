@@ -45,7 +45,7 @@ type signInInput struct {
 
 // @Summary      signIn
 // @Description  login
-// @ID			 lgin
+// @ID			 login
 // @Tags         auth
 // @Accept       json
 // @Produce      json

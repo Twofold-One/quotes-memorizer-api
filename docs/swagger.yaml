@@ -5,6 +5,13 @@ definitions:
       message:
         type: string
     type: object
+  handler.getAllQuotesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/quotes_memorizer.Quote'
+        type: array
+    type: object
   handler.signInInput:
     properties:
       password:
@@ -14,6 +21,28 @@ definitions:
     required:
     - password
     - username
+    type: object
+  handler.statusResponse:
+    properties:
+      status:
+        type: string
+    type: object
+  quotes_memorizer.Quote:
+    properties:
+      author:
+        type: string
+      created:
+        type: string
+      id:
+        type: integer
+      quote:
+        type: string
+      source:
+        type: string
+      sourcetype:
+        type: string
+    required:
+    - author
     type: object
   quotes_memorizer.User:
     properties:
@@ -37,12 +66,193 @@ info:
   title: Quotes-Memorizer API
   version: "1.0"
 paths:
+  /api/quotes:
+    get:
+      consumes:
+      - application/json
+      description: get all quotes
+      operationId: get-all-quotes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.getAllQuotesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get All Quotes
+      tags:
+      - quotes
+    post:
+      consumes:
+      - application/json
+      description: create new quote
+      operationId: create-quote
+      parameters:
+      - description: quote info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/quotes_memorizer.Quote'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Create Quote
+      tags:
+      - quotes
+  /api/quotes/:id:
+    delete:
+      consumes:
+      - application/json
+      description: delete quote
+      operationId: delete-quote
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Quote
+      tags:
+      - quotes
+    get:
+      consumes:
+      - application/json
+      description: get quote by id
+      operationId: get-quote-by-id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/quotes_memorizer.Quote'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get Quote By Id
+      tags:
+      - quotes
+    put:
+      consumes:
+      - application/json
+      description: update quote
+      operationId: update-quote
+      parameters:
+      - description: quote info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/quotes_memorizer.Quote'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Update Quote
+      tags:
+      - quotes
   /auth/sign-in:
     post:
       consumes:
       - application/json
       description: login
-      operationId: lgin
+      operationId: login
       parameters:
       - description: credentials
         in: body

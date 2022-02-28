@@ -8,6 +8,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary Create Quote
+// @Description create new quote
+// @ID create-quote
+// @Tags quotes
+// @Security ApiKeyAuth
+// @Accept json
+// @Produce json
+// @Param input body quotes_memorizer.Quote true "quote info"
+// @Success 200 {integer} Integer 1
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/quotes [post]
 func (h *Handler) createQuote(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -34,6 +48,19 @@ type getAllQuotesResponse struct {
 	Data []quotes_memorizer.Quote `json:"data"`
 }
 
+// @Summary Get All Quotes
+// @Description get all quotes
+// @ID get-all-quotes
+// @Tags quotes
+// @Security ApiKeyAuth	 
+// @Accept json
+// @Produce json
+// @Success 200 {object} getAllQuotesResponse
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/quotes [get]
 func (h *Handler) getAllQuotes(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -52,6 +79,19 @@ func (h *Handler) getAllQuotes(c *gin.Context) {
 
 }
 
+// @Summary Get Quote By Id
+// @Description get quote by id
+// @ID get-quote-by-id
+// @Tags quotes
+// @Security ApiKeyAuth	 
+// @Accept json
+// @Produce json
+// @Success 200 {object} quotes_memorizer.Quote
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/quotes/:id [get]
 func (h *Handler) getQuoteById(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -73,6 +113,20 @@ func (h *Handler) getQuoteById(c *gin.Context) {
 	c.JSON(http.StatusOK, quote)
 }
 
+// @Summary Update Quote
+// @Description update quote
+// @ID update-quote
+// @Tags quotes
+// @Security ApiKeyAuth	 
+// @Accept json
+// @Produce json
+// @Param input body quotes_memorizer.Quote true "quote info"
+// @Success 200 {object} statusResponse
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/quotes/:id [put]
 func (h *Handler) updateQuote(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -101,6 +155,19 @@ func (h *Handler) updateQuote(c *gin.Context) {
 	})
 }
 
+// @Summary Delete Quote
+// @Description delete quote
+// @ID delete-quote
+// @Tags quotes
+// @Security ApiKeyAuth	 
+// @Accept json
+// @Produce json
+// @Success 200 {object} statusResponse
+// @Failure 400 {object} errorResponse
+// @Failure 404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/quotes/:id [delete]
 func (h *Handler) deleteQuote(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
