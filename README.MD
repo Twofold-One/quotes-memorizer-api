@@ -10,6 +10,6 @@ Application API contains user JWT authorization and usual CRUD operations with q
 
 -Swagger documentation (ready)
 
--Tests for endpoints
+<!-- -Tests for endpoints -->
 
 <!-- Special thanks to [Maksim Zhashkevych](https://github.com/zhashkevych). -->
